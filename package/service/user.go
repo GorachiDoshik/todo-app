@@ -14,6 +14,10 @@ func NewUserService(repo repository.User) *UserService {
 }
 
 func (s *UserService) Update(userId int, input models.UpdateUser) error {
+	if err := input.Validate(); err != nil {
+		return err
+	}
+
 	return s.repo.Update(userId, input)
 }
 
